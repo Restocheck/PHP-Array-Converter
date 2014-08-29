@@ -1,5 +1,5 @@
 """
-Converts php 4 arrays to php 5 arrays
+Converts old php arrays to the new php5.4 arrays
 @author Thomas Marcelis
 @email thomas@restocheck.com
 """
