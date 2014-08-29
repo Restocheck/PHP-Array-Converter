@@ -1,5 +1,7 @@
 """
 Converts php 4 arrays to php 5 arrays
+@author Thomas Marcelis
+@email thomas@restocheck.com
 """
 import sys
 
@@ -7,10 +9,10 @@ INCORRECT_STRINGS = {'is_array(' : -3, 'in_array(' : -3}
 
 def check_args():
     """
-    checks the arguments
+    Checks the arguments
     """
     if len(sys.argv) != 2:
-        print("Error: One Argument Please")
+        print("Error: Please supply one file as argument")
         print(sys.argv)
         return False
     return True
@@ -34,7 +36,7 @@ def all_array_occurences(text):
 
 def check_occurences(text, indices):
     """
-    return a corrected list of indices
+    Return a corrected list of indices (the INCORRECT_STRINGS get removed)
     """
 
     for indice in indices:
@@ -50,7 +52,7 @@ def check_occurences(text, indices):
 
 def find_closing_brace(start, text):
     """
-    finds the matching closing
+    Finds the matching closing parenthese
     """
     end = start
 
@@ -69,7 +71,7 @@ def find_closing_brace(start, text):
 
 def find_closing_array_braces(indices, text):
     """
-    find the closing braces for the arrays
+    Find all the closing parentheses for the indices
     """
     brace_indices = []
 
@@ -80,7 +82,7 @@ def find_closing_array_braces(indices, text):
 
 def convert(file_name):
     """
-    Searches for php 4 arrays and converts them
+    Converts old php arrays to new ones and writes the change to the file
     """
     #read file
     try:
@@ -130,6 +132,9 @@ def convert(file_name):
     except Exception:
         print("Error: ", sys.exc_info()[0])
         return
+
+        print(len(indice) + ' occurences replaced in file ' + file_name)
+
     return
 
 if __name__ == "__main__":
