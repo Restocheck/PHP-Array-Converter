@@ -110,7 +110,8 @@ def convert(file_name):
     new_string = text
 
     for closing_brace in closing_braces:
-        new_string = new_string[:closing_brace] + ']' + new_string[closing_brace+1:]
+        new_string = new_string[:closing_brace] + ']' \
+            + new_string[closing_brace+1:]
 
 
     indices.sort()
