@@ -1,5 +1,5 @@
 """
-Converts php 4 arrays to php 5 arrays
+Converts old arrays to new php 5.4 arrays
 """
 import sys
 
