@@ -45,6 +45,7 @@ def check_occurences(text, indices):
                 incorrect = True
         if incorrect:
             indices.remove(indice)
+            return check_occurences(text, indices)
 
     return indices
 
