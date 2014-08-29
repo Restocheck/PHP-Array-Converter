@@ -11,9 +11,8 @@ def check_args():
     """
     Checks the arguments
     """
-    if len(sys.argv) != 2:
-        print("Error: Please supply one file as argument")
-        print(sys.argv)
+    if len(sys.argv) < 2:
+        print("Error: Please supply at least one file as argument")
         return False
     return True
 
@@ -42,7 +41,6 @@ def check_occurences(text, indices):
     for indice in indices:
         incorrect = False
         for incorrect_match, offset in INCORRECT_STRINGS.items():
-            #print(text[indice+offset:indice+6])
             if text[indice+offset:indice+6] == incorrect_match:
                 incorrect = True
         if incorrect:
@@ -95,18 +93,18 @@ def convert(file_name):
 
     indices = all_array_occurences(text)
     if indices == 0:
-        print("Error: No occurences found.")
+        print("Error: No occurences found in file " + file_name)
         return
 
     indices = check_occurences(text, indices)
     if indices == 0:
-        print("Error: No occurences found.")
+        print("Error: No occurences found " + file_name)
         return
 
     try:
         closing_braces = find_closing_array_braces(indices, text)
     except Exception:
-        print('Error: Unbalanced braces')
+        print('Error: Unbalanced braces in file ' + file_name)
         return
 
     new_string = text
@@ -122,8 +120,6 @@ def convert(file_name):
         new_string = new_string[:indice] + '[' + new_string[indice+6:]
         text[indice:indice+6].replace('array(', '[')
 
-    print(new_string)
-
     #write file
     try:
         array_file = open(file_name, 'w')
@@ -133,10 +129,11 @@ def convert(file_name):
         print("Error: ", sys.exc_info()[0])
         return
 
-        print(len(indice) + ' occurences replaced in file ' + file_name)
+    print(str(len(indices)) + ' occurences replaced in file ' + file_name)
 
     return
 
 if __name__ == "__main__":
     if check_args():
-        convert(sys.argv[1])
+        for arg in sys.argv[1:]:
+            convert(arg)
