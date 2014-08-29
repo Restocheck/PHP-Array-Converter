@@ -6,7 +6,8 @@ python 3
 
 # Usage
 
-python convert.py file.php
+Supply at least one file to the script
+python convert.py file.php [file2.php [ ... ]]
 
 # Note
 
